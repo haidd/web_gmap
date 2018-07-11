@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id='show_map_template_website'>
+        <t t-name="ShowMapTemplateWebsite">
+            <div id="googleMap" style="height:100%;"/>
+            <!-- Google map script -->
+            <t t-raw='link_script'/>
+            <script type="text/javascript">
+                function encode_utf8(s) {
+                    return unescape(encodeURIComponent(s));
+                }
+
+                function decode_utf8(s) {
+                    return decodeURIComponent(escape(s));
+                }
+                setTimeout(function() {
+                    var locations = <t t-esc='lst_info'/>;
+                    var myLatlng = {lat: locations[0][0], lng: locations[0][1]};
+                    var map = new google.maps.Map(document.getElementById('googleMap'), {
+                        zoom: 18,
+                        center: myLatlng
+                    });
+                    var infowindow = new google.maps.InfoWindow();
+
+                    var marker, i;
+
+                    for (i = 0; i &lt; locations.length; i++) {  
+                        marker = new google.maps.Marker({
+                            position: new google.maps.LatLng(locations[i][0], locations[i][1]),
+                            map: map
+                        });
+                        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                            return function() {
+                                infowindow.setContent(decode_utf8(locations[i][2]));
+                                infowindow.open(map, marker);
+                            }
+                        })(marker, i));
+                    }
+                }, 3000);
+            </script>
+        </t>
+        </template>
+</odoo>

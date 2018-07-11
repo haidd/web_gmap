@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="view_crm_partner_geo_form_inherit" model="ir.ui.view">
+        <field name="name">view.crm.partner.geo.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base_geolocalize.view_crm_partner_geo_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='geo_location']" position="replace">
+                <page name="geo_location" string="Partner Assignation">
+                    <!-- something to do here -->
+                    <group string="Geo Location">
+                        <div class="oe_button_box" style="float: none;">
+                            <div style="margin-right: 135px;">
+                                <button class="oe_inline oe_stat_button" icon="fa-location-arrow" name="geo_localize" string="Geo Localize" type="object"/>
+                                <button class="oe_inline oe_stat_button" icon="fa-map" name="button_show_map" string="Show map" type="object"/>
+                            </div>
+                        </div>
+                    </group>
+                    <br/>
+                    <group>
+                        <group>
+                            <table style="border-collapse: collapse; width: 50%;">
+                                <tr>
+                                    <th style="text-align: center;padding: 4px;border: 1px solid #252525;">Date</th>
+                                    <th style="text-align: center;padding: 4px;border: 1px solid #252525;">Latitude</th>
+                                    <th style="text-align: center;padding: 4px;border: 1px solid #252525;">Longitude</th>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;padding: 4px;border: 1px solid #252525;">
+                                        <field name="date_localization" nolabel="1"/>
+                                    </td>
+                                    <td style="text-align: center;padding: 4px;border: 1px solid #252525;">
+                                        <field name="partner_latitude" nolabel="1"/>
+                                    </td>
+                                    <td style="text-align: center;padding: 4px;border: 1px solid #252525;">
+                                        <field name="partner_longitude" nolabel="1"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </group>
+                        <group/>
+                        <group/>
+                        <group/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
